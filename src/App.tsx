@@ -9,7 +9,7 @@ import Badge from '@mui/material/Badge';
 // Styles
 import { Wrapper } from './App.styles';
 // Types
-export type CartItemType = {
+export type PoductType = {
 	id: number;
 	category: string;
 	description: string;
@@ -17,13 +17,17 @@ export type CartItemType = {
 	price: number;
 	title: string;
 	amount: number;
+	rating: {
+		count: number;
+		rate: number;
+	};
 };
-const getProducts = async (): Promise<CartItemType[]> => {
+const getProducts = async (): Promise<PoductType[]> => {
 	return await (await fetch('https://fakestoreapi.com/products')).json();
 };
 
 const App = () => {
-	const { data, isLoading, error } = useQuery<CartItemType[]>(
+	const { data, isLoading, error } = useQuery<PoductType[]>(
 		'products',
 		getProducts
 	);
