@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 // Components
+import Product from './product/product';
 import { Drawer } from '@mui/material';
 import { LinearProgress } from '@mui/material';
 import { Grid } from '@mui/material';
@@ -31,7 +32,20 @@ const App = () => {
 	if (isLoading) return <LinearProgress />;
 	if (error) return <div>Something went wrong...</div>;
 
-	return <div className='App'>Start</div>;
+	return (
+		<Wrapper>
+			<Grid container spacing={3}>
+				{data?.map((product) => (
+					<Grid item key={product.id} xs={12} sm={4}>
+						<Product
+							product={product}
+							handleAddToCart={handleAddToCart}
+						/>
+					</Grid>
+				))}
+			</Grid>
+		</Wrapper>
+	);
 };
 
 export default App;
