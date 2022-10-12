@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 // Components
-import Drawer from '@mui/material';
-import LinearProgress from '@mui/material';
-import Grid from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material';
-import Badge from '@mui/material/Badge';
+import { Drawer } from '@mui/material';
+import { LinearProgress } from '@mui/material';
+import { Grid } from '@mui/material';
+import { AddShoppingCart } from '@mui/icons-material';
+import { Badge } from '@mui/icons-material';
 // Styles
 import { Wrapper } from './App.styles';
 // Types
@@ -21,6 +21,16 @@ const App = () => {
 		StoreService.getProducts
 	);
 	console.log(data);
+
+	const getTotalItems = () => null;
+
+	const handleAddToCart = (clickedProduct: ProductType) => null;
+
+	const handleRemoveFromCart = () => null;
+
+	if (isLoading) return <LinearProgress />;
+	if (error) return <div>Something went wrong...</div>;
+
 	return <div className='App'>Start</div>;
 };
 
