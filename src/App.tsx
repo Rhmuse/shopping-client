@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 // Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import { Navbar } from './Navbar/Navbar';
 import { Drawer, LinearProgress, Grid, Badge } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 
@@ -61,30 +62,38 @@ const App = () => {
 	if (error) return <div>Something went wrong...</div>;
 
 	return (
-		<Wrapper>
-			<Drawer
-				anchor='right'
-				open={cartIsOpen}
-				onClose={() => setCartIsOpen(false)}>
-				<Cart
-					cartItems={cartItems}
-					addToCart={handleAddToCart}
-					removeFromCart={handleRemoveFromCart}
-				/>
-			</Drawer>
-			<StyledButton onClick={() => setCartIsOpen(true)}>
-				<Badge badgeContent={getTotalItems(cartItems)} color='error'>
-					<AddShoppingCart />
-				</Badge>
-			</StyledButton>
-			<Grid container spacing={3}>
-				{data?.map((item) => (
-					<Grid item key={item.id} xs={12} sm={4}>
-						<Item item={item} handleAddToCart={handleAddToCart} />
-					</Grid>
-				))}
-			</Grid>
-		</Wrapper>
+		<>
+			<Navbar />
+			<Wrapper>
+				<Drawer
+					anchor='right'
+					open={cartIsOpen}
+					onClose={() => setCartIsOpen(false)}>
+					<Cart
+						cartItems={cartItems}
+						addToCart={handleAddToCart}
+						removeFromCart={handleRemoveFromCart}
+					/>
+				</Drawer>
+				<StyledButton onClick={() => setCartIsOpen(true)}>
+					<Badge
+						badgeContent={getTotalItems(cartItems)}
+						color='error'>
+						<AddShoppingCart />
+					</Badge>
+				</StyledButton>
+				<Grid container spacing={3}>
+					{data?.map((item) => (
+						<Grid item key={item.id} xs={12} sm={4}>
+							<Item
+								item={item}
+								handleAddToCart={handleAddToCart}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			</Wrapper>
+		</>
 	);
 };
 
