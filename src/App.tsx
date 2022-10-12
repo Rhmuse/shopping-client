@@ -9,27 +9,16 @@ import Badge from '@mui/material/Badge';
 // Styles
 import { Wrapper } from './App.styles';
 // Types
-export type PoductType = {
-	id: number;
-	category: string;
-	description: string;
-	image: string;
-	price: number;
-	title: string;
-	amount: number;
-	rating: {
-		count: number;
-		rate: number;
-	};
-};
-const getProducts = async (): Promise<PoductType[]> => {
-	return await (await fetch('https://fakestoreapi.com/products')).json();
-};
+import { ProductTypeDTO } from './api/dto/ProductTypeDTO';
+// Service
+import { StoreService } from './api/StoreService';
+
+type ProductType = ProductTypeDTO;
 
 const App = () => {
-	const { data, isLoading, error } = useQuery<PoductType[]>(
+	const { data, isLoading, error } = useQuery<ProductType[]>(
 		'products',
-		getProducts
+		StoreService.getProducts
 	);
 	console.log(data);
 	return <div className='App'>Start</div>;
