@@ -1,13 +1,11 @@
-import { useState, useM } from 'react';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 // Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
-import { Drawer } from '@mui/material';
-import { LinearProgress } from '@mui/material';
-import { Grid } from '@mui/material';
+import { Drawer, LinearProgress, Grid, Badge } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
-import { Badge } from '@mui/icons-material';
+
 // Styles
 import { Wrapper, StyledButton } from './App.styles';
 // Types
@@ -24,7 +22,7 @@ const App = () => {
 		StoreService.getItems
 	);
 
-	const getTotalItems = (items: ItemType[]) =>
+	const getTotalItems = (items: ItemType[]): number =>
 		items.reduce((i: number, item) => i + item.amount, 0);
 
 	const handleAddToCart = (clickedItem: ItemType) => null;
