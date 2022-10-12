@@ -1,9 +1,9 @@
-import { ProductTypeDTO } from './dto/ProductTypeDTO';
+import { ItemTypeDTO } from './dto/ItemTypeDTO';
 
 const HOST: string = 'https://fakestoreapi.com';
 
 export const StoreService = {
-	getProducts: async (): Promise<ProductTypeDTO[]> => {
+	getItems: async (): Promise<ItemTypeDTO[]> => {
 		return (await fetch(`${HOST}/products`)).json();
 	},
 };

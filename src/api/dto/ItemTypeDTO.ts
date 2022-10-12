@@ -1,4 +1,4 @@
-export type ProductTypeDTO = {
+export type ItemTypeDTO = {
 	id: number;
 	category: string;
 	description: string;
