@@ -1,31 +1,33 @@
-import { useState } from 'react';
+import { useState, useM } from 'react';
 import { useQuery } from 'react-query';
 // Components
-import Product from './product/product';
+import Item from './Item/Item';
+import Cart from './Cart/Cart';
 import { Drawer } from '@mui/material';
 import { LinearProgress } from '@mui/material';
 import { Grid } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 import { Badge } from '@mui/icons-material';
 // Styles
-import { Wrapper } from './App.styles';
+import { Wrapper, StyledButton } from './App.styles';
 // Types
-import { ProductTypeDTO } from './api/dto/ProductTypeDTO';
+import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
 // Service
 import { StoreService } from './api/StoreService';
 
-type ProductType = ProductTypeDTO;
-
 const App = () => {
-	const { data, isLoading, error } = useQuery<ProductType[]>(
+	const [cartIsOpen, setCartIsOpen] = useState(false);
+	const [cartItems, setCartItems] = useState([] as ItemType[]);
+
+	const { data, isLoading, error } = useQuery<ItemType[]>(
 		'products',
-		StoreService.getProducts
+		StoreService.getItems
 	);
-	console.log(data);
 
-	const getTotalItems = () => null;
+	const getTotalItems = (items: ItemType[]) =>
+		items.reduce((i: number, item) => i + item.amount, 0);
 
-	const handleAddToCart = (clickedProduct: ProductType) => null;
+	const handleAddToCart = (clickedItem: ItemType) => null;
 
 	const handleRemoveFromCart = () => null;
 
@@ -34,13 +36,25 @@ const App = () => {
 
 	return (
 		<Wrapper>
+			<Drawer
+				anchor='right'
+				open={cartIsOpen}
+				onClose={() => setCartIsOpen(false)}>
+				<Cart
+					cartItems={cartItems}
+					addToCart={handleAddToCart}
+					removeFromCart={handleRemoveFromCart}
+				/>
+			</Drawer>
+			<StyledButton onClick={() => setCartIsOpen(true)}>
+				<Badge badgeContent={getTotalItems(cartItems)} color='error'>
+					<AddShoppingCart />
+				</Badge>
+			</StyledButton>
 			<Grid container spacing={3}>
-				{data?.map((product) => (
-					<Grid item key={product.id} xs={12} sm={4}>
-						<Product
-							product={product}
-							handleAddToCart={handleAddToCart}
-						/>
+				{data?.map((item) => (
+					<Grid item key={item.id} xs={12} sm={4}>
+						<Item item={item} handleAddToCart={handleAddToCart} />
 					</Grid>
 				))}
 			</Grid>

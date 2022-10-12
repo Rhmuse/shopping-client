@@ -11,7 +11,7 @@ type Props = {
 	handleAddToCart: (clickedItem: ItemType) => void;
 };
 
-const Item: React.FC<Props> = ({ item: item, handleAddToCart }) => (
+const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
 	<ItemWrapper>
 		<img src={item.image} alt={item.title} />
 		<div>
