@@ -1,27 +1,19 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { Routes, Route } from 'react-router-dom';
 // Components
-import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import Store from './Store/Store';
 import { Navbar } from './Navbar/Navbar';
-import { Drawer, LinearProgress, Grid, Badge } from '@mui/material';
-import { AddShoppingCart } from '@mui/icons-material';
-
+import { Drawer, LinearProgress, Grid, Badge, Container } from '@mui/material';
+import { ShoppingCart } from '@mui/icons-material';
 // Styles
 import { Wrapper, StyledButton } from './App.styles';
 // Types
 import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
-// Service
-import { StoreService } from './api/StoreService';
 
 const App = () => {
 	const [cartIsOpen, setCartIsOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([] as ItemType[]);
-
-	const { data, isLoading, error } = useQuery<ItemType[]>(
-		'products',
-		StoreService.getItems
-	);
 
 	const getTotalItems = (items: ItemType[]): number =>
 		items.reduce((i: number, item) => i + item.amount, 0);
@@ -58,12 +50,15 @@ const App = () => {
 		);
 	};
 
-	if (isLoading) return <LinearProgress />;
-	if (error) return <div>Something went wrong...</div>;
-
 	return (
-		<>
+		<Container>
 			<Navbar />
+			{/* <Routes>
+				<Route path='/' element={} />
+				<Route path='/' element={} />
+				<Route path='/' element={} />
+			</Routes> */}
+
 			<Wrapper>
 				<Drawer
 					anchor='right'
@@ -75,25 +70,18 @@ const App = () => {
 						removeFromCart={handleRemoveFromCart}
 					/>
 				</Drawer>
-				<StyledButton onClick={() => setCartIsOpen(true)}>
-					<Badge
-						badgeContent={getTotalItems(cartItems)}
-						color='error'>
-						<AddShoppingCart />
-					</Badge>
-				</StyledButton>
-				<Grid container spacing={3}>
-					{data?.map((item) => (
-						<Grid item key={item.id} xs={12} sm={4}>
-							<Item
-								item={item}
-								handleAddToCart={handleAddToCart}
-							/>
-						</Grid>
-					))}
-				</Grid>
+				{getTotalItems(cartItems) >= 1 ? (
+					<StyledButton onClick={() => setCartIsOpen(true)}>
+						<Badge
+							badgeContent={getTotalItems(cartItems)}
+							color='error'>
+							<ShoppingCart fontSize='large' />
+						</Badge>
+					</StyledButton>
+				) : null}
+				<Store addToCart={handleAddToCart} />
 			</Wrapper>
-		</>
+		</Container>
 	);
 };
 
