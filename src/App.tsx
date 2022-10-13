@@ -13,6 +13,8 @@ import { ShoppingCartOutlined } from '@mui/icons-material';
 import { Wrapper } from './App.styles';
 // Types
 import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
+// Utilites
+import { isItemInCart } from './utilites/isItemInCart';
 
 const App = () => {
 	const [cartIsOpen, setCartIsOpen] = useState(false);
@@ -35,17 +37,14 @@ const App = () => {
 	const handleAddToCart = (clickedItem: ItemType) => {
 		setCartItems((prev) => {
 			// Item is already in the cart.
-			const isItemInCart = prev.find(
-				(item: ItemType) => item.id === clickedItem.id
-			);
-
-			if (isItemInCart) {
+			if (isItemInCart(clickedItem)) {
 				return prev.map((item) =>
 					item.id === clickedItem.id
 						? { ...item, amount: item.amount + 1 }
 						: item
 				);
 			}
+
 			// Item is not in the Cart.
 			return [...prev, { ...clickedItem, amount: 1 }];
 		});
