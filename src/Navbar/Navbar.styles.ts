@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const NavbarWrapper = styled.div`
-	flex-direction: column;
-	justify-content: flex-start;
 	.navlinks {
 		margin-left: 10px;
 		display: flex;

@@ -8,10 +8,10 @@ type ItemType = ItemTypeDTO;
 
 type Props = {
 	item: ItemType;
-	handleAddToCart: (clickedItem: ItemType) => void;
+	addToCart: (clickedItem: ItemType) => void;
 };
 
-const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
+const Item: React.FC<Props> = ({ item, addToCart }) => (
 	<ItemWrapper>
 		<img src={item.image} alt={item.title} />
 		<div>
@@ -19,7 +19,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
 			<p>{item.description}</p>
 			<h3>${item.price}</h3>
 		</div>
-		<Button onClick={() => handleAddToCart(item)}>Add to Cart</Button>
+		<Button onClick={() => addToCart(item)}>Add to Cart</Button>
 	</ItemWrapper>
 );
 
