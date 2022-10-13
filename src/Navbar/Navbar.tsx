@@ -1,7 +1,7 @@
 import { AppBar, Link, Toolbar, Typography } from '@mui/material';
 import { NavbarWrapper } from './Navbar.styles';
 
-export const Navbar = () => {
+const Navbar = () => {
 	return (
 		<NavbarWrapper>
 			<AppBar position='static'>
@@ -28,3 +28,5 @@ export const Navbar = () => {
 		</NavbarWrapper>
 	);
 };
+
+export default Navbar;
