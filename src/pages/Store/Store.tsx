@@ -3,11 +3,11 @@ import { useQuery } from 'react-query';
 import { StoreWrapper } from './Store.styles';
 // Components
 import { Grid, LinearProgress } from '@mui/material';
-import Item from '../Item/Item';
+import Item from '../../Item/Item';
 // Service
-import { StoreService } from '../api/StoreService';
+import { StoreService } from '../../api/StoreService';
 // Types
-import { ItemTypeDTO as ItemType } from '../api/dto/ItemTypeDTO';
+import { ItemTypeDTO as ItemType } from '../../api/dto/ItemTypeDTO';
 
 type Props = {
 	addToCart: (clickedItem: ItemType) => void;

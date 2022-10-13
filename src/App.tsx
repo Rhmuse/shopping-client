@@ -1,19 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // Components
 import Cart from './Cart/Cart';
-import Store from './Store/Store';
+import Store from './pages/Store/Store';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
 import { Navbar } from './Navbar/Navbar';
-import { Drawer, LinearProgress, Grid, Badge, Container } from '@mui/material';
-import { ShoppingCart } from '@mui/icons-material';
+import { Drawer, Badge, Container, Button } from '@mui/material';
+import { ShoppingCartOutlined } from '@mui/icons-material';
 // Styles
-import { Wrapper, StyledButton } from './App.styles';
+import { Wrapper } from './App.styles';
 // Types
 import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
 
 const App = () => {
 	const [cartIsOpen, setCartIsOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([] as ItemType[]);
+
+	useEffect(() => {
+		const cart: ItemType[] = JSON.parse(
+			window.localStorage.getItem('cart')!
+		);
+		setCartItems(cart);
+	}, []);
+
+	useEffect(() => {
+		window.localStorage.setItem('cart', JSON.stringify(cartItems));
+	}, [cartItems]);
 
 	const getTotalItems = (items: ItemType[]): number =>
 		items.reduce((i: number, item) => i + item.amount, 0);
@@ -22,7 +35,7 @@ const App = () => {
 		setCartItems((prev) => {
 			// Item is already in the cart.
 			const isItemInCart = prev.find(
-				(item) => item.id === clickedItem.id
+				(item: ItemType) => item.id === clickedItem.id
 			);
 
 			if (isItemInCart) {
@@ -52,14 +65,17 @@ const App = () => {
 
 	return (
 		<Container>
-			<Navbar />
-			{/* <Routes>
-				<Route path='/' element={} />
-				<Route path='/' element={} />
-				<Route path='/' element={} />
-			</Routes> */}
-
+			<Navbar />{' '}
 			<Wrapper>
+				{getTotalItems(cartItems) >= 1 ? (
+					<Button onClick={() => setCartIsOpen(true)}>
+						<Badge
+							badgeContent={getTotalItems(cartItems)}
+							color='error'>
+							<ShoppingCartOutlined fontSize='large' />
+						</Badge>
+					</Button>
+				) : null}
 				<Drawer
 					anchor='right'
 					open={cartIsOpen}
@@ -70,17 +86,15 @@ const App = () => {
 						removeFromCart={handleRemoveFromCart}
 					/>
 				</Drawer>
-				{getTotalItems(cartItems) >= 1 ? (
-					<StyledButton onClick={() => setCartIsOpen(true)}>
-						<Badge
-							badgeContent={getTotalItems(cartItems)}
-							color='error'>
-							<ShoppingCart fontSize='large' />
-						</Badge>
-					</StyledButton>
-				) : null}
-				<Store addToCart={handleAddToCart} />
 			</Wrapper>
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route
+					path='/store'
+					element={<Store addToCart={handleAddToCart} />}
+				/>
+				<Route path='/about' element={<About />} />
+			</Routes>
 		</Container>
 	);
 };
