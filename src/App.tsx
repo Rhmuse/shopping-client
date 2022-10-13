@@ -5,7 +5,8 @@ import Cart from './Cart/Cart';
 import Store from './pages/Store/Store';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
-import { Navbar } from './Navbar/Navbar';
+import FAQ from './pages/FAQ/FAQ';
+import Navbar from './Navbar/Navbar';
 import { Drawer, Badge, Container, Button } from '@mui/material';
 import { ShoppingCartOutlined } from '@mui/icons-material';
 // Styles
@@ -94,6 +95,7 @@ const App = () => {
 					element={<Store addToCart={handleAddToCart} />}
 				/>
 				<Route path='/about' element={<About />} />
+				<Route path='/faq' element={<FAQ />} />
 			</Routes>
 		</Container>
 	);
