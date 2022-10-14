@@ -91,7 +91,12 @@ const App = () => {
 				<Route path='/' element={<Home />} />
 				<Route
 					path='/store'
-					element={<Store addToCart={handleAddToCart} />}
+					element={
+						<Store
+							addToCart={handleAddToCart}
+							removeFromCart={handleRemoveFromCart}
+						/>
+					}
 				/>
 				<Route path='/about' element={<About />} />
 				<Route path='/faq' element={<FAQ />} />

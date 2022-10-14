@@ -11,9 +11,10 @@ import { ItemTypeDTO as ItemType } from '../../api/dto/ItemTypeDTO';
 
 type Props = {
 	addToCart: (clickedItem: ItemType) => void;
+	removeFromCart: (id: number) => void;
 };
 
-const Store: React.FC<Props> = ({ addToCart }) => {
+const Store: React.FC<Props> = ({ addToCart, removeFromCart }) => {
 	const { data, isLoading, error } = useQuery<ItemType[]>(
 		'products',
 		StoreService.getItems
@@ -27,7 +28,11 @@ const Store: React.FC<Props> = ({ addToCart }) => {
 			<Grid container spacing={3}>
 				{data?.map((item) => (
 					<Grid item key={item.id} xs={12} sm={4}>
-						<Item item={item} addToCart={addToCart} />
+						<Item
+							item={item}
+							addToCart={addToCart}
+							removeFromCart={removeFromCart}
+						/>
 					</Grid>
 				))}
 			</Grid>
