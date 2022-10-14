@@ -4,6 +4,7 @@ import ItemButtons from './ItemButtons/ItemButtons';
 import { ItemTypeDTO as ItemType } from '../../../api/dto/ItemTypeDTO';
 // Styles
 import { ItemWrapper } from './Item.styles';
+import { Container } from '@mui/material';
 
 type Props = {
 	item: ItemType;
@@ -14,11 +15,11 @@ type Props = {
 const Item: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
 	<ItemWrapper>
 		<img src={item.image} alt={item.title} />
-		<div className='information'>
+		<Container className='information'>
 			<h3 className='title'>{item.title}</h3>
-			<p className='description'>{item.description}</p>
 			<h3 className='price'>${item.price}</h3>
-		</div>
+		</Container>
+
 		<ItemButtons
 			item={item}
 			addToCart={addToCart}

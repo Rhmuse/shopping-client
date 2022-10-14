@@ -6,6 +6,8 @@ import { ItemTypeDTO as ItemType } from '../../../../api/dto/ItemTypeDTO';
 import { Button, Container } from '@mui/material';
 // Utilites
 import { isItemInCart } from '../../../../utilites/isItemInCart';
+import { useEffect, useState } from 'react';
+import localState from '../../../../state/localState';
 
 type Props = {
 	item: ItemType;
@@ -14,20 +16,55 @@ type Props = {
 };
 
 const ItemButtons: React.FC<Props> = ({ item, addToCart, removeFromCart }) => {
-	return (
-		<ItemButtonWrapper>
-			{isItemInCart(item) ? (
-				<Container className='inCart'>
-					<Button onClick={() => addToCart(item)}>+</Button>
-					<Button onClick={() => removeFromCart(item.id)}>-</Button>
-				</Container>
-			) : (
-				<Button className='notInCart' onClick={() => addToCart(item)}>
+	const cart = localState.cart.getCart();
+	const itemInCart = cart.find(
+		(cartItem: ItemType) => cartItem.id === item.id
+	);
+
+	if (itemInCart) {
+		item.amount = itemInCart.amount;
+	} else {
+		item.amount = 0;
+	}
+
+	const [amountInCart, setAmountInCart] = useState(item.amount);
+
+	const renderCart = () => {
+		if (amountInCart >= 1) {
+			return (
+				<div className='inCart'>
+					<Button
+						onClick={() => {
+							addToCart(item);
+							setAmountInCart(amountInCart + 1);
+						}}>
+						+
+					</Button>
+					<h4>{amountInCart}</h4>
+					<Button
+						onClick={() => {
+							removeFromCart(item.id);
+							setAmountInCart(amountInCart - 1);
+						}}>
+						-
+					</Button>
+				</div>
+			);
+		} else {
+			return (
+				<Button
+					className='notInCart'
+					onClick={() => {
+						addToCart(item);
+						setAmountInCart(amountInCart + 1);
+					}}>
 					Add to Cart
 				</Button>
-			)}
-		</ItemButtonWrapper>
-	);
+			);
+		}
+	};
+
+	return <ItemButtonWrapper>{renderCart()}</ItemButtonWrapper>;
 };
 
 export default ItemButtons;
