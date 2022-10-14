@@ -15,20 +15,20 @@ import { Wrapper } from './App.styles';
 import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
 // Utilites
 import { isItemInCart } from './utilites/isItemInCart';
+//State
+import localState from './state/localState';
 
 const App = () => {
 	const [cartIsOpen, setCartIsOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([] as ItemType[]);
 
 	useEffect(() => {
-		const cart: ItemType[] = JSON.parse(
-			window.localStorage.getItem('cart')!
-		);
+		const cart: ItemType[] = localState.cart.getCart();
 		setCartItems(cart);
 	}, []);
 
 	useEffect(() => {
-		window.localStorage.setItem('cart', JSON.stringify(cartItems));
+		localState.cart.setCart(cartItems);
 	}, [cartItems]);
 
 	const getTotalItems = (items: ItemType[]): number =>
