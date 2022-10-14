@@ -1,7 +1,7 @@
 // Components
 import ItemButtons from './ItemButtons/ItemButtons';
 // Types
-import { ItemTypeDTO as ItemType } from '../api/dto/ItemTypeDTO';
+import { ItemTypeDTO as ItemType } from '../../../api/dto/ItemTypeDTO';
 // Styles
 import { ItemWrapper } from './Item.styles';
 

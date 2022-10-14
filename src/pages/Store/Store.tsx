@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { StoreWrapper } from './Store.styles';
 // Components
 import { Grid, LinearProgress } from '@mui/material';
-import Item from '../../Item/Item';
+import Item from './Item/Item';
 // Service
 import { StoreService } from '../../api/StoreService';
 // Types

@@ -1,11 +1,11 @@
 // Styles
 import { ItemButtonWrapper } from './ItemButtons.styles';
 // Types
-import { ItemTypeDTO as ItemType } from '../../api/dto/ItemTypeDTO';
+import { ItemTypeDTO as ItemType } from '../../../../api/dto/ItemTypeDTO';
 // Components
 import { Button, Container } from '@mui/material';
 // Utilites
-import { isItemInCart } from '../../utilites/isItemInCart';
+import { isItemInCart } from '../../../../utilites/isItemInCart';
 
 type Props = {
 	item: ItemType;

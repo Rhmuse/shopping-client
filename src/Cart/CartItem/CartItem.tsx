@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 // Types
-import { ItemTypeDTO as CartItemType } from '../api/dto/ItemTypeDTO';
+import { ItemTypeDTO as CartItemType } from '../../api/dto/ItemTypeDTO';
 // Styles
 import { CartItemWrapper } from './CartItem.styles';
 
