@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ItemWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-content: space-between;
 	flex-direction: column;
 	width: 100%;
 	border: 1px solid lightBlue;
@@ -20,10 +21,11 @@ export const ItemWrapper = styled.div`
 		font-family: Arial, Helveitca, sans-serif;
 		padding: 1rem;
 		height: 100%;
+		text-align: center;
 	}
 
-	.price {
+	h3.price {
 		justify-content: center;
-		align-content: center;
+		text-align: center;
 	}
 `;

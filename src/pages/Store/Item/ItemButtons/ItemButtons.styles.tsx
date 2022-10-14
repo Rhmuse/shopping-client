@@ -10,5 +10,8 @@ export const ItemButtonWrapper = styled.div`
 	}
 
 	.inCart {
+		width: 100%;
+		justify-content: space-between;
+		flex-direction: row;
 	}
 `;
