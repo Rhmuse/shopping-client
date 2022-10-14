@@ -11,8 +11,9 @@ export const ItemWrapper = styled.div`
 
 	img {
 		max-height: 250px;
-		object-fit: cover;
+		object-fit: contain;
 		border-radius: 20px 20px 0 0;
+		padding: 20px 10px;
 	}
 
 	.information {
