@@ -3,10 +3,9 @@ import { ItemButtonWrapper } from './ItemButtons.styles';
 // Types
 import { ItemTypeDTO as ItemType } from '../../../../api/dto/ItemTypeDTO';
 // Components
-import { Button, Container, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 // Utilites
-import { isItemInCart } from '../../../../utilites/isItemInCart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import localState from '../../../../state/localState';
 
 type Props = {
