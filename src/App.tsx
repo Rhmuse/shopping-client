@@ -17,6 +17,7 @@ import { ItemTypeDTO as ItemType } from './api/dto/ItemTypeDTO';
 import { isItemInCart } from './utilites/isItemInCart';
 //State
 import localState from './state/localState';
+import Product from './pages/Product/Product';
 
 const App = () => {
 	const [cartIsOpen, setCartIsOpen] = useState(false);
@@ -65,7 +66,7 @@ const App = () => {
 
 	return (
 		<Container>
-			<Navbar />{' '}
+			<Navbar />
 			<Wrapper>
 				{getTotalItems(cartItems) >= 1 ? (
 					<Button onClick={() => setCartIsOpen(true)}>
@@ -100,6 +101,7 @@ const App = () => {
 				/>
 				<Route path='/about' element={<About />} />
 				<Route path='/faq' element={<FAQ />} />
+				<Route path='/product' element={<Product />} />
 			</Routes>
 		</Container>
 	);

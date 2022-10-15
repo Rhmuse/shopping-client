@@ -5,6 +5,7 @@ import { ItemTypeDTO as ItemType } from '../../../api/dto/ItemTypeDTO';
 // Styles
 import { ItemWrapper } from './Item.styles';
 import { Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 type Props = {
 	item: ItemType;

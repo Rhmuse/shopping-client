@@ -28,4 +28,12 @@ export const ItemWrapper = styled.div`
 		justify-content: center;
 		text-align: center;
 	}
+
+	a,
+	a:hover,
+	a:focus,
+	a:active {
+		color: inherit;
+		text-decoration: none;
+	}
 `;
