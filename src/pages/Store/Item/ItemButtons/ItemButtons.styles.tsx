@@ -8,10 +8,8 @@ export const ItemButtonWrapper = styled.div`
 		border-radius: 0 0 20px 20px;
 		flex-direction: column;
 	}
-
 	.inCart {
-		width: 100%;
-		justify-content: space-between;
-		flex-direction: row;
+		font-size: 1rem;
+		border-radius: 5px;
 	}
 `;

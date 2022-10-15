@@ -3,7 +3,7 @@ import { ItemButtonWrapper } from './ItemButtons.styles';
 // Types
 import { ItemTypeDTO as ItemType } from '../../../../api/dto/ItemTypeDTO';
 // Components
-import { Button, Container } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 // Utilites
 import { isItemInCart } from '../../../../utilites/isItemInCart';
 import { useEffect, useState } from 'react';
@@ -32,23 +32,37 @@ const ItemButtons: React.FC<Props> = ({ item, addToCart, removeFromCart }) => {
 	const renderCart = () => {
 		if (amountInCart >= 1) {
 			return (
-				<div className='inCart'>
-					<Button
-						onClick={() => {
-							addToCart(item);
-							setAmountInCart(amountInCart + 1);
-						}}>
-						+
-					</Button>
-					<h4>{amountInCart}</h4>
-					<Button
-						onClick={() => {
-							removeFromCart(item.id);
-							setAmountInCart(amountInCart - 1);
-						}}>
-						-
-					</Button>
-				</div>
+				<Grid
+					container
+					direction='row'
+					justifyContent='center'
+					alignItems='center'
+					spacing={{ xs: 2 }}
+					style={{ lineHeight: '0.5' }}>
+					<Grid item>
+						<Button
+							onClick={() => {
+								addToCart(item);
+								setAmountInCart(amountInCart + 1);
+							}}
+							className='inCart'>
+							+
+						</Button>
+					</Grid>
+					<Grid item className='inCart'>
+						<h4>{amountInCart}</h4>
+					</Grid>
+					<Grid item>
+						<Button
+							onClick={() => {
+								removeFromCart(item.id);
+								setAmountInCart(amountInCart - 1);
+							}}
+							className='inCart'>
+							-
+						</Button>
+					</Grid>
+				</Grid>
 			);
 		} else {
 			return (
